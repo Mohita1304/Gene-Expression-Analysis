@@ -6,6 +6,7 @@ library(affy)
 # Read Raw data (.CEL file) 
 mydata<-ReadAffy() 
 eset <- rma(mydata)  # RMA normalization
+
 ## Identification of Differentially expressed genes using limma 
 
 #matrix construction
@@ -72,9 +73,3 @@ cor_file1 <- read.table("Corr_File1.txt", header = TRUE)
 cor_file2 <- read.table("Corr_File2.txt", header = TRUE)
 merged_cor <- merge(cor_file1, cor_file2, by = c("Gene1", "Gene2")) # merge if gene pairs is present in both the files 
 same_sign <- subset(merged_cor, sign(cor.x) == sign(cor.y)) # to check if the corr pattern is same i.e positive or negative correlation
-
-# rename the column name
-colnames(same_sign)[3]="Cor_GSE24514"
-colnames(same_sign)[4]="P_GSE24514"
-colnames(same_sign)[6]="P_GSE37364"
-colnames(same_sign)[5]="Cor_GSE37364"
